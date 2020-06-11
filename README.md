@@ -1,1 +1,1 @@
-Model Auto Build is a framework that dynamically creates a tabular model based on an Excel template. This framework works for all destinations of tabular models - SQL Server Analysis Services, Azure Analysis Services, and Power BI Premium.
+Model Auto Build is a framework that dynamically creates a tabular model based on an Excel template. This framework is compatible for all destinations of tabular models - SQL Server Analysis Services, Azure Analysis Services, and Power BI Premium.
