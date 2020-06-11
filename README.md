@@ -2,8 +2,10 @@ Model Auto Build is a framework that dynamically creates a tabular model based o
 
 Instructions:
 
-1.) Download the following files: 
+1.) Download the following files:
+
       ModelAutoBuild.xlsx
       ExcelToTextMaster.exe
       ModelAutoBuild.cs
       BlankModelTemplate.bim
+
