@@ -10,8 +10,11 @@ Instructions:
       BlankModelTemplate.bim
 
 2.) Open the ModelAutoBuild.xlsx file.
+
 3.) Populate the columns in each of the tabs, following the instructions within the notes shown on the header rows.
+
 4.) Open the ModelAutoBuild.cs in a Text Editor (i.e. Notepad, Notepad ++, Sublime).
+
 5.) On the first line of code, change the folderName parameter to the folder that contains all of the files in Step 1. 
     
     Here is an example:
@@ -19,7 +22,9 @@ Instructions:
     var folderName = @"C:\Documents\ModelAutoBuild\";
     
 6.) Save and close the ModelAutoBuild.cs file.
+
 7.) Open the Command Prompt.
+
 8.) Run the ExcelToTextMaster program as shown below. The folder used for each of the two parameters below should be the same folder used in Step 1.
 
     Here is an example:
