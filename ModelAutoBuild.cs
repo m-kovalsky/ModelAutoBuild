@@ -1,4 +1,4 @@
-var folderName = @"C:\Users\mikova\OneDrive - Microsoft\Power BI CAT\ModelAutoBuild\";
+var folderName = @"C:\Documents\"; //Update this to the folder that contains the ModelAutoBuild.xlsx file
 
 /********************Data Sources********************/
 var fileName = "ModelAutoBuild_DataSources.txt";
