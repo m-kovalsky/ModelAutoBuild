@@ -2,7 +2,7 @@
 
 Model Auto Build is a framework that dynamically creates a tabular model based on an Excel template. This framework is compatible for all destinations of tabular models - SQL Server Analysis Services, Azure Analysis Services, and Power BI Premium. This framework is also viable for both in-memory and direct query models.
 
-***Purpose***
+## Purpose
 
 To provide a framework for business stakeholders and developers when initially outlining a model. When completed, the Excel template serves as a blueprint to the tabular model - akin to a blueprint for designing a building. 
 
@@ -10,7 +10,7 @@ Additionally, this speeds up the development time of the model once the blueprin
 
 Lastly, many people who are new to Power BI are more familiar with Excel. Since the framework is based in Excel it provides a familiar environment to such folks. 
 
-***Instructions***
+## Instructions
 
 1.) Download the following files and save them to a single folder on your computer.
 
@@ -55,7 +55,7 @@ https://github.com/otykier/TabularEditor/wiki/Command-line-Options
 If you want to deploy the model to Power BI Premium, view the instructions here:
 https://github.com/TabularEditor/tabulareditor.github.io/blob/master/_posts/2020-06-02-PBI-SP-Access.md
 
-***Additional Notes***
+## Additional Notes
 
 * It is not necessary to fill in all the details of the model. For example, the Expression (DAX) and other such elements may be created afterwards. The goal of this framework is not to create a completed model per say but to quickly and intelligently build the foundation.
 
