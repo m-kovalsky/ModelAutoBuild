@@ -248,7 +248,7 @@ foreach(var o in Model.AllMeasures.ToList())
 /*****************************************************/
 
 /*********************Relationships*******************/
-/*
+
 fileName = "ModelAutoBuild_Relationships.txt";
 
 Metadata = ReadFile(folderName+fileName);
@@ -295,7 +295,52 @@ foreach(var row in tsvRows.Skip(1))
                
            
 }
-*/
+
+/*****************************************************/
+
+/************Auto-create relationships***************/
+
+// This executes if there are no rows in the Relationships tab within the Excel template
+if (tsvRows.Count() == 1)
+{
+    fileName = "ModelAutoBuild_Tables.txt";
+
+    Metadata = ReadFile(folderName+fileName);
+
+    // Split the file into rows by CR and LF characters:
+    tsvRows = Metadata.Split(new[] {'\r','\n'},StringSplitOptions.RemoveEmptyEntries);
+
+    // Loop through all rows but skip the first one:
+    foreach(var row in tsvRows.Skip(1))
+    {
+        var tsvColumns = row.Split('\t');     // Assume file uses tabs as column separator
+        var name = tsvColumns[0];            
+        var tableType = tsvColumns[2].ToUpper();
+        var keySuffix = "Id";
+        
+        if(tableType == "FACT")
+        {
+            foreach(var factColumn in Model.Tables[name].Columns.Where(c => c.Name.EndsWith(keySuffix)))
+            {
+                var dim = Model.Tables.FirstOrDefault(t => factColumn.Name.EndsWith(t.Name + keySuffix));
+                    
+                if(dim != null)
+                {
+                     var dimColumn = dim.Columns.FirstOrDefault(c => factColumn.Name.EndsWith(c.Name));
+                     if(dimColumn != null)
+                     {
+                         var rel = Model.AddRelationship();
+                         rel.FromColumn = factColumn;
+                         rel.ToColumn = dimColumn;
+                     }
+                     
+                        
+                }
+            }
+                
+        }
+    }
+}
 /*****************************************************/
 
 /*************************Model***********************/
@@ -321,53 +366,13 @@ foreach(var row in tsvRows.Skip(1))
     // Update model mode
     if(m == "DirectQuery" || m == "Direct Query" || m == "DQ")
     {
-    	Model.DefaultMode = ModeType.DirectQuery;
+        Model.DefaultMode = ModeType.DirectQuery;
     }
 
     //This enables overwriting deployments to Power BI Premium
     if(prem == "Yes" || prem == "Y")
     {
-        Model.DefaultPowerBIDataSourceVersion = PowerBIDataSourceVersion.PowerBI_V3;	
+        Model.DefaultPowerBIDataSourceVersion = PowerBIDataSourceVersion.PowerBI_V3;    
     }  
 }
 
-/************Auto-create relationships***************/
-
-fileName = "ModelAutoBuild_Tables.txt";
-
-Metadata = ReadFile(folderName+fileName);
-
-// Split the file into rows by CR and LF characters:
-tsvRows = Metadata.Split(new[] {'\r','\n'},StringSplitOptions.RemoveEmptyEntries);
-
-// Loop through all rows but skip the first one:
-foreach(var row in tsvRows.Skip(1))
-{
-    var tsvColumns = row.Split('\t');     // Assume file uses tabs as column separator
-    var name = tsvColumns[0];            
-    var tableType = tsvColumns[2].ToUpper();
-    var keySuffix = "Id";
-    
-    if(tableType == "FACT")
-    {
-        foreach(var factColumn in Model.Tables[name].Columns.Where(c => c.Name.EndsWith(keySuffix)))
-        {
-            var dim = Model.Tables.FirstOrDefault(t => factColumn.Name.EndsWith(t.Name + keySuffix));
-                
-            if(dim != null)
-            {
-                 var dimColumn = dim.Columns.FirstOrDefault(c => factColumn.Name.EndsWith(c.Name));
-                 if(dimColumn != null)
-                 {
-                     var rel = Model.AddRelationship();
-                     rel.FromColumn = factColumn;
-                     rel.ToColumn = dimColumn;
-                 }
-                 
-                    
-            }
-        }
-            
-    }
-}
-/*****************************************************/
