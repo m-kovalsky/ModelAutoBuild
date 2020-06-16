@@ -6,11 +6,11 @@ Model Auto Build is a framework that dynamically creates a tabular model based o
 
 ## Purpose
 
-To provide a framework for business stakeholders and developers when initially outlining a model. When completed, the Excel template serves as a blueprint to the tabular model - akin to a blueprint for designing a building. 
+To provide a framework for business stakeholders and developers when initially outlining a model. When completed, the Excel template serves as a blueprint for the tabular model - akin to a blueprint for designing a building. 
 
-Additionally, this speeds up the development time of the model once the blueprint has been laid out. Development time can be spent on more advanced things such as solving DAX challenges or complex business logic requirements.
+This framework speeds up the development time of the model once the blueprint has been laid out. Development time can be spent on more advanced tasks such as solving DAX challenges or complex business logic requirements.
 
-Lastly, many people who are new to Power BI are more familiar with Excel. Since the framework is based in Excel it provides a familiar environment to such folks. 
+Lastly, many people who are new to Power BI are more familiar with Excel. Since the framework is based in Excel it provides a familiar environment for such folks. 
 
 ## Instructions
 
