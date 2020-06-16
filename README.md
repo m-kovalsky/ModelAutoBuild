@@ -31,7 +31,7 @@ Lastly, many people who are new to Power BI are more familiar with Excel. Since 
     
     Here is an example:
     
-    var folderName = @"C:\Documents\ModelAutoBuild\";
+    var folderName = @"C:\Documents\ModelAutoBuild";
     
 6.) Save and close the ModelAutoBuild.cs file.
 
@@ -41,7 +41,7 @@ Lastly, many people who are new to Power BI are more familiar with Excel. Since 
 
     Here is an example:
     
-    "C:\Documents\ModelAutoBuild\ExcelToTextMaster.exe" "C:\Documents\ModelAutoBuild"
+    "C:\Documents\ExcelToTextMaster.exe" "C:\Documents\ModelAutoBuild"
 
 9.) Make sure you have Tabular Editor installed on your computer. Here is a link to download it: https://github.com/otykier/TabularEditor/releases
 
