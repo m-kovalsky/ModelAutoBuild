@@ -14,12 +14,13 @@ Lastly, many people who are new to Power BI are more familiar with Excel. Since 
 
 ## Instructions
 
-1.) Download the following files and save them to a single folder on your computer.
+1.) Download the following files from the ModelAutoBuild folder and save them to a single folder on your computer.
 
       ModelAutoBuild.xlsx
       ExcelToTextMaster.exe
       ModelAutoBuild.cs
       BlankModelTemplate.bim
+      ModelAutoBuild_Example.xlsx
 
 2.) Open the ModelAutoBuild.xlsx file.
 
