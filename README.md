@@ -31,7 +31,7 @@ Lastly, many people who are new to Power BI are more familiar with Excel. Since 
     
     Here is an example:
     
-    var folderName = @"C:\Documents\ModelAutoBuild";
+    var folderName = @"C:\Documents\ModelAutoBuild\";
     
 6.) Save and close the ModelAutoBuild.cs file.
 
