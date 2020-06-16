@@ -20,7 +20,7 @@ Lastly, many people who are new to Power BI are more familiar with Excel. Since 
       ExcelToTextMaster.exe
       ModelAutoBuild.cs
       BlankModelTemplate.bim
-      ModelAutoBuild_Example.xlsx
+      ModelAutoBuild_Example.xlsx (this file shows an example of a properly filled out ModelAutoBuild.xlsx file)
 
 2.) Open the ModelAutoBuild.xlsx file.
 
