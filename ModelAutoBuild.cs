@@ -1,7 +1,7 @@
-var folderName = @"C:\Documents\"; //Update this to the folder that contains the ModelAutoBuild.xlsx file
+var folderName = @"C:\Documents"; //Update this to the folder that contains the ModelAutoBuild.xlsx file
 
 /********************Data Sources********************/
-var fileName = "ModelAutoBuild_DataSources.txt";
+var fileName = "\ModelAutoBuild_DataSources.txt";
 
 var Metadata = ReadFile(folderName+fileName);
 
@@ -57,7 +57,7 @@ foreach(var o in Model.DataSources.ToList())
 /*****************************************************/
 
 /************************Tables***********************/
-fileName = "ModelAutoBuild_Tables.txt";
+fileName = "\ModelAutoBuild_Tables.txt";
 
 Metadata = ReadFile(folderName+fileName);
 
@@ -100,7 +100,7 @@ foreach(var row in tsvRows.Skip(1))
 /*****************************************************/
 
 /*****************Measures and Columns****************/
-fileName = "ModelAutoBuild_MeasuresColumns.txt";
+fileName = "\ModelAutoBuild_MeasuresColumns.txt";
 
 Metadata = ReadFile(folderName+fileName);
 
@@ -249,7 +249,7 @@ foreach(var o in Model.AllMeasures.ToList())
 
 /*********************Relationships*******************/
 
-fileName = "ModelAutoBuild_Relationships.txt";
+fileName = "\ModelAutoBuild_Relationships.txt";
 
 Metadata = ReadFile(folderName+fileName);
 
@@ -303,7 +303,7 @@ foreach(var row in tsvRows.Skip(1))
 // This executes if there are no rows in the Relationships tab within the Excel template
 if (tsvRows.Count() == 1)
 {
-    fileName = "ModelAutoBuild_Tables.txt";
+    fileName = "\ModelAutoBuild_Tables.txt";
 
     Metadata = ReadFile(folderName+fileName);
 
@@ -345,7 +345,7 @@ if (tsvRows.Count() == 1)
 
 /*************************Model***********************/
 
-fileName = "ModelAutoBuild_Model.txt";
+fileName = "\ModelAutoBuild_Model.txt";
 
 Metadata = ReadFile(folderName+fileName);
 
