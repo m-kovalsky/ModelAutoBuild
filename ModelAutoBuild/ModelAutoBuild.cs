@@ -304,7 +304,7 @@ foreach(var row in tsvRows.Skip(1))
 if (tsvRows.Count() == 1)
 {
     fileName = @"\ModelAutoBuild_Tables.txt";
-
+    
     Metadata = ReadFile(folderName+fileName);
 
     // Split the file into rows by CR and LF characters:
@@ -374,5 +374,72 @@ foreach(var row in tsvRows.Skip(1))
     {
         Model.DefaultPowerBIDataSourceVersion = PowerBIDataSourceVersion.PowerBI_V3;    
     }  
+}
+
+/*********************Roles*********************/
+fileName = @"\ModelAutoBuild_Roles.txt";
+
+Metadata = ReadFile(folderName+fileName);
+
+//// Delete all roles 
+//foreach(var o in Model.Roles.ToList())
+//{
+//    o.Delete();
+//}
+
+// Split the file into rows by CR and LF characters:
+tsvRows = Metadata.Split(new[] {'\r','\n'},StringSplitOptions.RemoveEmptyEntries);
+
+// Loop through all rows but skip the first one:
+foreach(var row in tsvRows.Skip(1))
+{
+    var tsvColumns = row.Split('\t');     // Assume file uses tabs as column separator
+    var r = tsvColumns[0];
+    var rm = tsvColumns[1];
+    var mp = tsvColumns[2];
+    
+    // Add Roles and do not duplicate
+    if (!Model.Roles.ToList().Any(x=> x.Name == r))
+    {
+    var obj = Model.AddRole(r);
+    obj.RoleMembers = rm;
+    }
+
+    if (mp == "Read")
+    {
+        Model.Roles[r].ModelPermission = ModelPermission.Read;
+    }
+    else if (mp == "Admin")
+    {
+        Model.Roles[r].ModelPermission = ModelPermission.Administrator;
+    }
+    
+}
+
+/**********************RLS*********************/
+fileName = @"\ModelAutoBuild_RLS.txt";
+
+Metadata = ReadFile(folderName+fileName);
+
+// Split the file into rows by CR and LF characters:
+tsvRows = Metadata.Split(new[] {'\r','\n'},StringSplitOptions.RemoveEmptyEntries);
+
+// Loop through all rows but skip the first one:
+foreach(var row in tsvRows.Skip(1))
+{
+    var tsvColumns = row.Split('\t');     // Assume file uses tabs as column separator
+    var r = tsvColumns[0];
+    var tableName = tsvColumns[1];
+    var rls = tsvColumns[2];
+    var rlsLength = rls.Length;
+    
+    if(rls[0] == '"')
+      {
+          rls = rls.Substring(1,rlsLength - 2);
+      }
+    
+    rls = rls.Replace("\"\"","\"");    
+    
+    Model.Tables[tableName].RowLevelSecurity[r] = rls;    
 }
 
