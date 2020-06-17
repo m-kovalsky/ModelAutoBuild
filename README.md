@@ -42,7 +42,7 @@ Lastly, many people who are new to Power BI are more familiar with Excel. Since 
 
     Here is an example:
     
-    "C:\Documents\ExcelToTextMaster.exe" "C:\Documents\ModelAutoBuild"
+    "C:\Documents\ExcelToTextMaster.exe" "C:\Documents\ModelAutoBuild\ModelAutoBuild.xlsx"
 
 9.) Make sure you have Tabular Editor installed on your computer. Here is a link to download it: https://github.com/otykier/TabularEditor/releases
 
