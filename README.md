@@ -38,7 +38,7 @@ Lastly, many people who are new to Power BI are more familiar with Excel. Since 
 
 7.) Open the Command Prompt.
 
-8.) Run the ExcelToTextMaster program as shown below. The folder used for each of the two parameters below should be the same folder used in Step 1.
+8.) Run the ExcelToTextMaster program as shown below. The first parameter is the ExcelToTextMaster program, the second is the file path of the ModelAutoBuild Excel file.
 
     Here is an example:
     
