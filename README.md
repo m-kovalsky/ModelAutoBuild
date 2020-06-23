@@ -52,7 +52,7 @@ Lastly, many people who are new to Power BI are more familiar with Excel. Since 
     
 After completing Step 10, your new .bim file is ready. It is in the location specified under the -B parameter in Step 10. It may be opened in Tabular Editor.
 
-If you want to deploy the model to SQL Server Analysis Services of Azure Analysis Services, view the instructions here:
+If you want to deploy the model to SQL Server Analysis Services or Azure Analysis Services, view the instructions here:
 https://github.com/otykier/TabularEditor/wiki/Command-line-Options
 
 If you want to deploy the model to Power BI Premium, view the instructions here:
