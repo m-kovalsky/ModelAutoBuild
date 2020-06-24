@@ -139,78 +139,103 @@ foreach(var row in tsvRows.Skip(1))
     var desc = tsvColumns[13];
     
     // Add column properties
-    if(objectType == "Column")
+    if (objectType == "Column")
     {
-    var obj = Model.Tables[tableName].AddDataColumn(objectName);
-    obj.SourceColumn = sourceColumn;
-     
-    if(dt == "Integer")
+        if (String.IsNullOrEmpty(expr))
+        {
+            var obj = Model.Tables[tableName].AddDataColumn(objectName);
+            obj.SourceColumn = sourceColumn;
+        }
+        else
+        {
+            var obj = Model.Tables[tableName].AddCalculatedColumn(objectName);
+            obj.Expression = expr;
+        }
+        var col = Model.Tables[tableName].Columns[objectName];
+    if (dt == "Integer")
     {
-       obj.DataType = DataType.Int64;
+        col.DataType = DataType.Int64;
     } 
     else if(dt == "String")
     {
-        obj.DataType = DataType.String;
+        col.DataType = DataType.String;
     }
     else if(dt == "Datetime")
     {
-        obj.DataType = DataType.DateTime;
+        col.DataType = DataType.DateTime;
     }
     else if(dt == "Double")
     {
-        obj.DataType = DataType.Double;
+        col.DataType = DataType.Double;
     }
-    if(hide == "Yes")
+    if (hide == "Yes")
     {
-        obj.IsHidden = true;
+        col.IsHidden = true;
     }
     if(key == "Yes")
     {
-        obj.IsKey = true;
+        col.IsKey = true;
     }
     if (summ =="None") 
     {
-       obj.SummarizeBy = AggregateFunction.None;
+        col.SummarizeBy = AggregateFunction.None;
     }
-    obj.DisplayFolder = displayFolder;
-    obj.DataCategory = dataCategory;
-    obj.Description = desc;
+    col.DisplayFolder = displayFolder;
+    col.DataCategory = dataCategory;
+    col.Description = desc;
        if(sortByCol != "")
        {
-          obj.SortByColumn = Model.Tables[tableName].Columns[sortByCol]; 
+           col.SortByColumn = Model.Tables[tableName].Columns[sortByCol]; 
        }
        if(fmt == "Whole Number")
-           obj.FormatString = "#,0";
+       {
+           col.FormatString = "#,0";
+       }
        else if(fmt == "Percentage")
-           obj.FormatString = "#,0.0%;-#,0.0%;#,0.0%";
+       {
+           col.FormatString = "#,0.0%;-#,0.0%;#,0.0%";
+       }
        else if(fmt == "Month Year")
-           obj.FormatString = "mmmm YYYY";
+       {
+           col.FormatString = "mmmm YYYY";
+       }
        else if(fmt == "Currency")
-           obj.FormatString = "$#,0;$#,0;$#,0";
+       {
+           col.FormatString = "$#,0;$#,0;$#,0";
+       }
        else if(fmt == "Decimal")
-           obj.FormatString = "#,0.0";
+       {
+           col.FormatString = "#,0.0";
+       }
     }
 
     // Add measure properties
-    if(objectType == "Measure")
+    if (objectType == "Measure")
     {
     var obj = Model.Tables[tableName].AddMeasure(objectName); 
     obj.Expression = expr;
     obj.DisplayFolder = displayFolder;
     obj.Description = desc;
-    if(hide == "Yes")
+    if (hide == "Yes")
     {
         obj.IsHidden = true;
     }
-       if(fmt == "Whole Number")
+       if (fmt == "Whole Number")
+       {
            obj.FormatString = "#,0";
-       else if(fmt == "Percentage")
+       }
+       else if (fmt == "Percentage")
+       {
            obj.FormatString = "#,0.0%;-#,0.0%;#,0.0%";
-       else if(fmt == "Currency")
+       }
+       else if (fmt == "Currency")
+       {
            obj.FormatString = "$#,0;$#,0;$#,0";
-       else if(fmt == "Month Year")
-           obj.FormatString = "mmmm YYYY";
-    
+       }
+       else if (fmt == "Month Year")
+       {
+           obj.FormatString = "mmmm YYYY";  
+       }
     }
 }
 
@@ -222,7 +247,7 @@ foreach(var o in Model.AllMeasures.ToList())
     var fs = o.FormatString;
     
     // Remove quotes from Expressions
-    if(expr[0] == '"')
+    if  (expr[0] == '"')
       {
         o.Expression = expr.Substring(1,exprLength - 2);
       }
