@@ -46,7 +46,7 @@ Lastly, many people who are new to Power BI are more familiar with Excel. Since 
 
 9.) Make sure you have Tabular Editor installed on your computer. Here is a link to download it: https://github.com/otykier/TabularEditor/releases
 
-10.) Run the following in the Command Prompt. Ensure that the location of Tabular Editor matches where it is stored on your computer. Also ensure that the folder used in the -S and -B paramters is the same as the folder from Step 1.
+10.) Run the following in the Command Prompt. Ensure that the location of Tabular Editor matches where it is stored on your computer. Also ensure that the folder used in the -S and -B parameters is the same as the folder from Step 1.
 
     start /wait /d "C:\Program Files (x86)\Tabular Editor" TabularEditor.exe "C:\Documents\ModelAutoBuild\BlankModelTemplate.bim" -S "C:\Documents\ModelAutoBuild\ModelAutoBuild.cs" -B "C:\Documents\ModelAutoBuild\NewModel.bim"
     
