@@ -1,15 +1,10 @@
 var folderName = @"C:\Documents"; //Update this to the folder that contains the ModelAutoBuild.xlsx file
 
 /********************Data Sources********************/
+
 var fileName = @"\ModelAutoBuild_DataSources.txt";
 
 var Metadata = ReadFile(folderName+fileName);
-
-// Delete all data sources 
-foreach(var o in Model.DataSources.ToList())
-{
-    o.Delete();
-}
 
 // Split the file into rows by CR and LF characters:
 var tsvRows = Metadata.Split(new[] {'\r','\n'},StringSplitOptions.RemoveEmptyEntries);
@@ -31,32 +26,28 @@ foreach(var row in tsvRows.Skip(1))
     }
     
     // Add Data Sources
-    var obj = Model.AddDataSource(name);
-    
-    if(provider == "SQL")
+    if (!Model.DataSources.ToList().Any(x=> x.Name == name))
     {
-        obj.Provider = "System.Data.SqlClient";
-        obj.ConnectionString = conn +";Integrated Security=True;Persist Security Info=True";
+        var obj = Model.AddDataSource(name);
+    }
+    
+    var ds = (Model.DataSources[name] as ProviderDataSource);
+    
+    if (provider == "SQL")
+    {
+        ds.Provider = "System.Data.SqlClient";
+        ds.ConnectionString = conn +";Integrated Security=True;Persist Security Info=True";
     }
     else if(provider == "Databricks")
     {
-        obj.Provider = "";
-        obj.ConnectionString = "Provider=MSDASQL;DSN="+srvr;
+        ds.Provider = "";
+        ds.ConnectionString = "Provider=MSDASQL;DSN="+srvr;
     }
 }
 
-// Remove duplicated data sources
-foreach(var o in Model.DataSources.ToList())
-{
-    var n = o.Name;
-    if(n.Substring(n.Length - 2) == " 1")
-    {
-        o.Delete();
-    }
-}
 /*****************************************************/
-
 /************************Tables***********************/
+
 fileName = @"\ModelAutoBuild_Tables.txt";
 
 Metadata = ReadFile(folderName+fileName);
@@ -97,9 +88,10 @@ foreach(var row in tsvRows.Skip(1))
         Model.Tables[name].Partitions[name].Mode = ModeType.DirectQuery;
     }
 }
-/*****************************************************/
 
+/*****************************************************/
 /*****************Measures and Columns****************/
+
 fileName = @"\ModelAutoBuild_MeasuresColumns.txt";
 
 Metadata = ReadFile(folderName+fileName);
@@ -151,91 +143,95 @@ foreach(var row in tsvRows.Skip(1))
             var obj = Model.Tables[tableName].AddCalculatedColumn(objectName);
             obj.Expression = expr;
         }
+
         var col = Model.Tables[tableName].Columns[objectName];
-    if (dt == "Integer")
-    {
-        col.DataType = DataType.Int64;
-    } 
-    else if(dt == "String")
-    {
-        col.DataType = DataType.String;
-    }
-    else if(dt == "Datetime")
-    {
-        col.DataType = DataType.DateTime;
-    }
-    else if(dt == "Double")
-    {
-        col.DataType = DataType.Double;
-    }
-    if (hide == "Yes")
-    {
-        col.IsHidden = true;
-    }
-    if(key == "Yes")
-    {
-        col.IsKey = true;
-    }
-    if (summ =="None") 
-    {
-        col.SummarizeBy = AggregateFunction.None;
-    }
-    col.DisplayFolder = displayFolder;
-    col.DataCategory = dataCategory;
-    col.Description = desc;
-       if(sortByCol != "")
-       {
-           col.SortByColumn = Model.Tables[tableName].Columns[sortByCol]; 
-       }
-       if(fmt == "Whole Number")
-       {
-           col.FormatString = "#,0";
-       }
-       else if(fmt == "Percentage")
-       {
-           col.FormatString = "#,0.0%;-#,0.0%;#,0.0%";
-       }
-       else if(fmt == "Month Year")
-       {
-           col.FormatString = "mmmm YYYY";
-       }
-       else if(fmt == "Currency")
-       {
-           col.FormatString = "$#,0;$#,0;$#,0";
-       }
-       else if(fmt == "Decimal")
-       {
-           col.FormatString = "#,0.0";
-       }
+
+        if (dt == "Integer")
+        {
+            col.DataType = DataType.Int64;
+        } 
+        else if (dt == "String")
+        {
+            col.DataType = DataType.String;
+        }
+        else if (dt == "Datetime")
+        {
+            col.DataType = DataType.DateTime;
+        }
+        else if (dt == "Double")
+        {
+            col.DataType = DataType.Double;
+        }
+        if (hide == "Yes")
+        {
+            col.IsHidden = true;
+        }
+        if(key == "Yes")
+        {
+            col.IsKey = true;
+        }
+        if (summ =="None") 
+        {
+            col.SummarizeBy = AggregateFunction.None;
+        }
+
+        col.DisplayFolder = displayFolder;
+        col.DataCategory = dataCategory;
+        col.Description = desc;
+
+        if(sortByCol != "")
+        {
+            col.SortByColumn = Model.Tables[tableName].Columns[sortByCol]; 
+        }
+        if(fmt == "Whole Number")
+        {
+            col.FormatString = "#,0";
+        }
+        else if(fmt == "Percentage")
+        {
+            col.FormatString = "#,0.0%;-#,0.0%;#,0.0%";
+        }
+        else if(fmt == "Month Year")
+        {
+            col.FormatString = "mmmm YYYY";
+        }
+        else if(fmt == "Currency")
+        {
+            col.FormatString = "$#,0;$#,0;$#,0";
+        }
+        else if(fmt == "Decimal")
+        {
+            col.FormatString = "#,0.0";
+        }
     }
 
     // Add measure properties
     if (objectType == "Measure")
     {
-    var obj = Model.Tables[tableName].AddMeasure(objectName); 
-    obj.Expression = expr;
-    obj.DisplayFolder = displayFolder;
-    obj.Description = desc;
-    if (hide == "Yes")
-    {
-        obj.IsHidden = true;
-    }
-       if (fmt == "Whole Number")
-       {
-           obj.FormatString = "#,0";
-       }
-       else if (fmt == "Percentage")
-       {
-           obj.FormatString = "#,0.0%;-#,0.0%;#,0.0%";
-       }
-       else if (fmt == "Currency")
-       {
-           obj.FormatString = "$#,0;$#,0;$#,0";
-       }
-       else if (fmt == "Month Year")
-       {
-           obj.FormatString = "mmmm YYYY";  
-       }
+      var obj = Model.Tables[tableName].AddMeasure(objectName); 
+      obj.Expression = expr;
+      obj.DisplayFolder = displayFolder;
+      obj.Description = desc;
+      if (hide == "Yes")
+      {
+          obj.IsHidden = true;
+      }
+      if (fmt == "Whole Number")
+      {
+          obj.FormatString = "#,0";
+      }
+      else if (fmt == "Percentage")
+      {
+          obj.FormatString = "#,0.0%;-#,0.0%;#,0.0%";
+      }
+      else if (fmt == "Currency")
+      {
+          obj.FormatString = "$#,0;$#,0;$#,0";
+      }
+      else if (fmt == "Month Year")
+      {
+          obj.FormatString = "mmmm YYYY";  
+      }
     }
 }
 
@@ -247,7 +243,7 @@ foreach(var o in Model.AllMeasures.ToList())
     var fs = o.FormatString;
     
     // Remove quotes from Expressions
-    if  (expr[0] == '"')
+    if (expr[0] == '"')
       {
         o.Expression = expr.Substring(1,exprLength - 2);
       }
@@ -271,7 +267,6 @@ foreach(var o in Model.AllMeasures.ToList())
 }
 
 /*****************************************************/
-
 /*********************Relationships*******************/
 
 fileName = @"\ModelAutoBuild_Relationships.txt";
@@ -317,12 +312,9 @@ foreach(var row in tsvRows.Skip(1))
            {
                obj.CrossFilteringBehavior = CrossFilteringBehavior.BothDirections;
            }
-               
-           
 }
 
 /*****************************************************/
-
 /************Auto-create relationships***************/
 
 // This executes if there are no rows in the Relationships tab within the Excel template
@@ -366,8 +358,8 @@ if (tsvRows.Count() == 1)
         }
     }
 }
-/*****************************************************/
 
+/*****************************************************/
 /*************************Model***********************/
 
 fileName = @"\ModelAutoBuild_Model.txt";
@@ -401,7 +393,9 @@ foreach(var row in tsvRows.Skip(1))
     }  
 }
 
+/***********************************************/
 /*********************Roles*********************/
+
 fileName = @"\ModelAutoBuild_Roles.txt";
 
 Metadata = ReadFile(folderName+fileName);
@@ -441,7 +435,9 @@ foreach(var row in tsvRows.Skip(1))
     
 }
 
+/**********************************************/
 /**********************RLS*********************/
+
 fileName = @"\ModelAutoBuild_RLS.txt";
 
 Metadata = ReadFile(folderName+fileName);
@@ -468,3 +464,46 @@ foreach(var row in tsvRows.Skip(1))
     Model.Tables[tableName].RowLevelSecurity[r] = rls;    
 }
 
+/**********************************************/
+/******************Hierarchies*****************/
+
+fileName = @"\ModelAutoBuild_Hierarchies.txt";
+
+try
+{
+    Metadata = ReadFile(folderName+fileName);
+
+    // Split the file into rows by CR and LF characters:
+    tsvRows = Metadata.Split(new[] {'\r','\n'},StringSplitOptions.RemoveEmptyEntries);
+
+    // Delete all hierarchies
+    foreach(var o in Model.AllHierarchies.ToList())
+    {
+        o.Delete();
+    }
+
+    foreach(var row in tsvRows.Skip(1))
+    {
+        var tsvColumns = row.Split('\t');
+        var hierarchyName = tsvColumns[0];
+        var tableName = tsvColumns[1];
+        var columnName = tsvColumns[2];
+        
+        if (!Model.AllHierarchies.ToList().Any(x=> x.Name == hierarchyName))
+        {
+            // Add the hierarchy
+            var obj = Model.Tables[tableName].AddHierarchy();
+            // Name the hierarchy
+            obj.Name = hierarchyName;
+        }
+            // Add each level of each hierarchy
+            Model.Tables[tableName].Hierarchies[hierarchyName].AddLevel(columnName);
+    }
+}
+
+catch
+{
+    
+}
+
+/**********************************************/
