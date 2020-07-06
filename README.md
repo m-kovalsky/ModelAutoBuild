@@ -74,6 +74,7 @@ https://github.com/TabularEditor/tabulareditor.github.io/blob/master/_posts/2020
     
 ## Version History
 
-* 2020-06-11 Version 1.0 released on GitHub.com
-* 2020-06-16 Version 1.1 released (added Roles and Row Level Security)
-* 2020-06-24 Version 1.2 released (added support for Calculated Columns)
+* 2020-06-11 Version 1.0.0 released on GitHub.com
+* 2020-06-16 Version 1.1.0 released (added Roles and Row Level Security)
+* 2020-06-24 Version 1.2.0 released (added support for Calculated Columns)
+* 2020-07-06 Version 1.3.0 released (added support for Hierarchies)
