@@ -235,7 +235,7 @@ foreach(var row in tsvRows.Skip(1))
     }
 }
 
- // Remove quotes from Expression and FormatString; Format all DAX expressions
+ // Remove quotes from Expression and FormatString; Format all DAX expressions - Measures
 foreach(var o in Model.AllMeasures.ToList())
 {
     var expr = o.Expression;
@@ -263,6 +263,37 @@ foreach(var o in Model.AllMeasures.ToList())
     
     // Replaces \n with new line
      o.Expression = expr.Replace("\\n", "\r\n");
+
+}
+
+ // Remove quotes from Expression and FormatString; Format all DAX expressions - Calculated Columns
+foreach(var o in Model.AllColumns.Where(a => a.Type == ColumnType.Calculated).ToList())
+{
+    var expr = (Model.Tables[o.Table.Name].Columns[o.Name] as CalculatedColumn).Expression;
+    var exprLength = expr.Length;
+    var fs = o.FormatString;
+    
+    // Remove quotes from Expressions
+    if (expr[0] == '"')
+      {
+        (Model.Tables[o.Table.Name].Columns[o.Name] as CalculatedColumn).Expression = expr.Substring(1,exprLength - 2);
+      }
+    
+     (Model.Tables[o.Table.Name].Columns[o.Name] as CalculatedColumn).Expression = (Model.Tables[o.Table.Name].Columns[o.Name] as CalculatedColumn).Expression.Replace("\"\"","\"");
+     
+    // Remove quotes from Format Strings
+     o.FormatString = fs.Trim('"');
+
+    // Uncomment the line below if you want the DAX to be formatted.
+    // o.Expression = FormatDax(o.Expression);
+}
+
+foreach(var o in Model.AllColumns.Where(a => a.Type == ColumnType.Calculated).ToList())
+{
+    var expr = (Model.Tables[o.Table.Name].Columns[o.Name] as CalculatedColumn).Expression;
+    
+    // Replaces \n with new line
+     (Model.Tables[o.Table.Name].Columns[o.Name] as CalculatedColumn).Expression = expr.Replace("\\n", "\r\n");
 
 }
 
