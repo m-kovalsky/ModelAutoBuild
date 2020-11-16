@@ -285,7 +285,7 @@ foreach(var o in Model.AllColumns.Where(a => a.Type == ColumnType.Calculated).To
      o.FormatString = fs.Trim('"');
 
     // Uncomment the line below if you want the DAX to be formatted.
-    // o.FormatDax();
+    // (Model.Tables[o.Table.Name].Columns[o.Name] as CalculatedColumn).FormatDax();
 }
 
 foreach(var o in Model.AllColumns.Where(a => a.Type == ColumnType.Calculated).ToList())
