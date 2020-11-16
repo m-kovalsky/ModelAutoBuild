@@ -254,7 +254,7 @@ foreach(var o in Model.AllMeasures.ToList())
      o.FormatString = fs.Trim('"');
 
     // Uncomment the line below if you want the DAX to be formatted.
-    // o.Expression = FormatDax(o.Expression);
+    // o.FormatDax();
 }
 
 foreach(var o in Model.AllMeasures.ToList())
@@ -285,7 +285,7 @@ foreach(var o in Model.AllColumns.Where(a => a.Type == ColumnType.Calculated).To
      o.FormatString = fs.Trim('"');
 
     // Uncomment the line below if you want the DAX to be formatted.
-    // o.Expression = FormatDax(o.Expression);
+    // o.FormatDax();
 }
 
 foreach(var o in Model.AllColumns.Where(a => a.Type == ColumnType.Calculated).ToList())
@@ -294,7 +294,6 @@ foreach(var o in Model.AllColumns.Where(a => a.Type == ColumnType.Calculated).To
     
     // Replaces \n with new line
      (Model.Tables[o.Table.Name].Columns[o.Name] as CalculatedColumn).Expression = expr.Replace("\\n", "\r\n");
-
 }
 
 /*****************************************************/
