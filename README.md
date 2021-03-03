@@ -68,10 +68,6 @@ https://github.com/TabularEditor/tabulareditor.github.io/blob/master/_posts/2020
      
     'SELECT * FROM [SchemaName].[FACT_TableName]'
     
-* This tool is capable of formatting the DAX for all the measures in your model. Out of the box this is commented out. If you want the DAX to be formatted just uncomment the  following line within the .cs script: 
-      
-      o.Expression = FormatDax(o.Expression);
-    
 ## Version History
 
 * 2020-06-11 Version 1.0.0 released on GitHub.com
