@@ -56,7 +56,7 @@ SELECT * FROM [SchemaName].[FACT_TableName]
 
 ## Requirements
 
-* [Tabular Editor](https://tabulareditor.com/ "Tabular Editor") version 2.12.1 or higher
+* [Tabular Editor](https://tabulareditor.com/ "Tabular Editor") version 2.13.0 or higher
 
 
 ## Version History
