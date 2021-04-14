@@ -28,9 +28,8 @@ Lastly, many people who are new to Power BI are more familiar with Excel. Since 
 
 5.) Paste the ModelAutoBuild.cs into the [Advanced Scripting](https://docs.tabulareditor.com/Advanced-Scripting.html#working-with-the-model-object "Advanced Scripting") window within Tabular Editor.
 
-6.) Update the fileName parameter (on the 7th line of code) to be the location and file name of your saved ModelAutoBuild.xlsx file.
+6.) Update the fileName parameter (on the 7th line of code) to be the location and file name of your saved ModelAutoBuild.xlsx file. See the example below.
     
-    Here is an example:
 ```C#    
 string fileName = @"C:\Desktop\ModelAutoBuild";
 ```
