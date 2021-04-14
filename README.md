@@ -22,7 +22,7 @@ Lastly, many people who are new to Power BI are more familiar with Excel. Since 
 
 2.) Open the ModelAutoBuild.xlsx file.
 
-3.) Populate the columns in each of the tabs, following the instructions within the notes shown on the header rows. Close the Excel file.
+3.) Populate the columns in each of the tabs, following the instructions within the notes shown on the header rows. Close the Excel file when finished.
 
 4.) Open [Tabular Editor](https://tabulareditor.com/ "Tabular Editor") and create a new model (File -> New Model).
 
