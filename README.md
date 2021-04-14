@@ -28,11 +28,12 @@ Lastly, many people who are new to Power BI are more familiar with Excel. Since 
 
 5.) Paste the ModelAutoBuild.cs into the [Advanced Scripting](https://docs.tabulareditor.com/Advanced-Scripting.html#working-with-the-model-object "Advanced Scripting") window within Tabular Editor.
 
-6.) Update the fileName parameter (on the 7th line of code) to be the location and file name of your saved ModelAutoBuild.xlsx file. See the example below.
+6.) Update the fileName parameter (on the 7th line of code) to be the location and file name of your saved ModelAutoBuild.xlsx file (see the example below).
     
 ```C#    
 string fileName = @"C:\Desktop\ModelAutoBuild";
 ```
+
 7.) Click the 'Play' button (or press F5).
   
 After completing Step 7, your model has been created within Tabular Editor.
