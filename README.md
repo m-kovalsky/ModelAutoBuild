@@ -31,9 +31,9 @@ Lastly, many people who are new to Power BI are more familiar with Excel. Since 
 5.) On the first line of code, change the folderName parameter to the folder that contains all of the files in Step 1. 
     
     Here is an example:
-    
+```C#    
     var folderName = @"C:\Documents\ModelAutoBuild";
-    
+```
 6.) Save and close the ModelAutoBuild.cs file.
 
 7.) Open the Command Prompt.
