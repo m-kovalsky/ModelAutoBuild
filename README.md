@@ -1,6 +1,6 @@
 # [Model Auto Build](https://www.elegantbi.com/post/modelautobuild "Model Auto Build")
 
-Model Auto Build is a framework that dynamically creates a tabular model based on an Excel template. This framework is compatible for all destinations of tabular models - SQL Server Analysis Services, Azure Analysis Services, and Power BI Premium. This framework is also viable for both in-memory and direct query models.
+Model Auto Build is a framework that dynamically creates a tabular model based on an Excel template. This framework is compatible for all destinations of tabular models - [SQL Server Analysis Services](https://docs.microsoft.com/analysis-services/ssas-overview?view=asallproducts-allversions "SSAS"), [Azure Analysis Services](https://azure.microsoft.com/services/analysis-services/ "Azure AS"), and [Power BI Premium](https://powerbi.microsoft.com/power-bi-premium/ "Power BI Premium") (using the [XMLA R/W endpoint](https://docs.microsoft.com/power-bi/admin/service-premium-connect-tools "XMLA R/W endpoint)). This framework is also viable for both in-memory and direct query models.
 
 ![](https://github.com/m-kovalsky/ModelAutoBuild/blob/master/Images/ExcelTemplate.png)
 
@@ -17,46 +17,30 @@ Lastly, many people who are new to Power BI are more familiar with Excel. Since 
 1.) Download the following files from the ModelAutoBuild folder and save them to a single folder on your computer.
 
       ModelAutoBuild.xlsx
-      ExcelToTextMaster.exe
       ModelAutoBuild.cs
-      BlankModelTemplate.bim
       ModelAutoBuild_Example.xlsx (this file shows an example of a properly filled out ModelAutoBuild.xlsx file)
 
 2.) Open the ModelAutoBuild.xlsx file.
 
-3.) Populate the columns in each of the tabs, following the instructions within the notes shown on the header rows.
+3.) Populate the columns in each of the tabs, following the instructions within the notes shown on the header rows. Close the Excel file.
 
-4.) Open the ModelAutoBuild.cs in a Text Editor (i.e. Notepad, Notepad ++, Sublime).
+4.) Open [Tabular Editor](https://tabulareditor.com/ "Tabular Editor") and create a new model (File -> New Model).
 
-5.) On the first line of code, change the folderName parameter to the folder that contains all of the files in Step 1. 
+5.) Paste the ModelAutoBuild.cs into the [Advanced Scripting](https://docs.tabulareditor.com/Advanced-Scripting.html#working-with-the-model-object "Advanced Scripting") window within Tabular Editor.
+
+6.) Update the fileName parameter (on the 7th line of code) to be the location and file name of your saved ModelAutoBuild.xlsx file.
     
     Here is an example:
 ```C#    
-var folderName = @"C:\Documents\ModelAutoBuild";
+string fileName = @"C:\Desktop\ModelAutoBuild";
 ```
-6.) Save and close the ModelAutoBuild.cs file.
+7.) Click the 'Play' button (or press F5).
+  
+After completing Step 7, your model has been created within Tabular Editor.
 
-7.) Open the Command Prompt.
+If you want to deploy the model to SQL Server Analysis Services or Azure Analysis Services, view Tabular Editor's [Command Line Options](https://github.com/otykier/TabularEditor/wiki/Command-line-Options "Command Line Options").
 
-8.) Run the ExcelToTextMaster program as shown below. The first parameter is the ExcelToTextMaster program, the second is the file path of the ModelAutoBuild Excel file.
-
-    Here is an example:
-    
-    "C:\Documents\ExcelToTextMaster.exe" "C:\Documents\ModelAutoBuild\ModelAutoBuild.xlsx"
-
-9.) Make sure you have Tabular Editor installed on your computer. Here is a link to download it: https://github.com/otykier/TabularEditor/releases
-
-10.) Run the following in the Command Prompt. Ensure that the location of Tabular Editor matches where it is stored on your computer. Also ensure that the folder used in the -S and -B parameters is the same as the folder from Step 1.
-
-    start /wait /d "C:\Program Files (x86)\Tabular Editor" TabularEditor.exe "C:\Documents\ModelAutoBuild\BlankModelTemplate.bim" -S "C:\Documents\ModelAutoBuild\ModelAutoBuild.cs" -B "C:\Documents\ModelAutoBuild\NewModel.bim"
-    
-After completing Step 10, your new .bim file is ready. It is in the location specified under the -B parameter in Step 10. It may be opened in Tabular Editor.
-
-If you want to deploy the model to SQL Server Analysis Services or Azure Analysis Services, view the instructions here:
-https://github.com/otykier/TabularEditor/wiki/Command-line-Options
-
-If you want to deploy the model to Power BI Premium, view the instructions here:
-https://github.com/TabularEditor/tabulareditor.github.io/blob/master/_posts/2020-06-02-PBI-SP-Access.md
+If you want to deploy the model to Power BI Premium, view the instructions on this [post](https://github.com/TabularEditor/tabulareditor.github.io/blob/master/_posts/2020-06-02-PBI-SP-Access.md "post").
 
 ## Additional Notes
 
@@ -66,11 +50,19 @@ https://github.com/TabularEditor/tabulareditor.github.io/blob/master/_posts/2020
 
 * The partition queries generated by this framework are in the following format (example below is of a fact table). This is a best practice and ensures no logic is housed within the partition query.
      
-    'SELECT * FROM [SchemaName].[FACT_TableName]'
-    
+```SQL
+SELECT * FROM [SchemaName].[FACT_TableName]
+```
+
+## Requirements
+
+* [Tabular Editor](https://tabulareditor.com/ "Tabular Editor") version 2.12.1 or higher
+
+
 ## Version History
 
 * 2020-06-11 Version 1.0.0 released on GitHub.com
 * 2020-06-16 Version 1.1.0 released (added Roles and Row Level Security)
 * 2020-06-24 Version 1.2.0 released (added support for Calculated Columns)
 * 2020-07-06 Version 1.3.0 released (added support for Hierarchies)
+* 2021-04-14 Version 1.4.0 released (complete code overhaul; simplified script to be executed in Tabular Editor and pull directly from Excel)
