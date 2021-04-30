@@ -360,6 +360,18 @@ for (int i=0; i<tabCount; i++)
 			    {
 			        obj.ModelPermission = ModelPermission.Administrator;
 			    }
+			    else if (mp == "refresh")
+			    {
+			        obj.ModelPermission = ModelPermission.Refresh;
+			    }
+			    else if (mp == "readrefresh")
+			    {
+			        obj.ModelPermission = ModelPermission.ReadRefresh;
+			    }
+			    else if (mp == "none")
+			    {
+			        obj.ModelPermission = ModelPermission.None;
+			    }
 			}
 		}
 
