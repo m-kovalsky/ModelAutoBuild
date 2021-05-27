@@ -18,7 +18,7 @@ Lastly, many people who are new to Power BI are more familiar with Excel. Since 
 
       ModelAutoBuild.xlsx
       ModelAutoBuild.cs
-      ModelAutoBuild_Example.xlsx (this file shows an example of a properly filled out ModelAutoBuild.xlsx file)
+      ModelAutoBuild_Example.xlsx (this file shows an example of a properly completed ModelAutoBuild.xlsx file)
 
 2.) Open the ModelAutoBuild.xlsx file.
 
