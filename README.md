@@ -61,8 +61,10 @@ SELECT * FROM [SchemaName].[FACT_TableName]
 
 ## Version History
 
-* 2020-06-11 Version 1.0.0 released on GitHub.com
-* 2020-06-16 Version 1.1.0 released (added Roles and Row Level Security)
-* 2020-06-24 Version 1.2.0 released (added support for Calculated Columns)
-* 2020-07-06 Version 1.3.0 released (added support for Hierarchies)
-* 2021-04-14 Version 1.4.0 released (complete code overhaul; simplified script to be executed in Tabular Editor and pull directly from Excel)
+* 2021-05-27 [Version 1.4.2](https://github.com/m-kovalsky/ModelAutoBuild/releases/tag/1.4.2) released
+* 2021-04-30 [Version 1.4.1](https://github.com/m-kovalsky/ModelAutoBuild/releases/tag/1.4.1) released
+* 2021-04-14 [Version 1.4.0](https://github.com/m-kovalsky/ModelAutoBuild/releases/tag/1.4.0) released (complete code overhaul; simplified script to be executed in Tabular Editor and pull directly from Excel)
+* 2020-07-06 [Version 1.3.0](https://github.com/m-kovalsky/ModelAutoBuild/releases/tag/1.3.0) released (added support for Hierarchies)
+* 2020-06-24 [Version 1.2.0](https://github.com/m-kovalsky/ModelAutoBuild/releases/tag/1.2.0) released (added support for Calculated Columns)
+* 2020-06-16 [Version 1.1.0](https://github.com/m-kovalsky/ModelAutoBuild/releases/tag/1.1.0) released (added Roles and Row Level Security)
+* 2020-06-11 [Version 1.0.0](https://github.com/m-kovalsky/ModelAutoBuild/releases/tag/1.0.0) released on GitHub.com
