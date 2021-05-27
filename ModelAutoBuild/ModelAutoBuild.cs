@@ -505,23 +505,23 @@ if (autoGenRel)
 	string keySuffix = "Id";
     // Loop through all rows but skip the first one:
 	foreach (var tbl in Model.Tables.Where(a => a.Partitions[0].Query.Contains("FACT_")))
-	{
-		foreach (var factColumn in tbl.Columns.Where(a => a.Name.EndsWith(keySuffix)))
-		{
-			var dim = Model.Tables.FirstOrDefault(t => factColumn.Name.EndsWith(t.Name + keySuffix));
+    {
+        foreach (var factColumn in tbl.Columns.Where(a => a.Name.EndsWith(keySuffix)))
+        {
+            var dim = Model.Tables.FirstOrDefault(t => factColumn.Name == t.Name + keySuffix);
 
-			if (dim != null)
-			{
-				var dimColumn = dim.Columns.FirstOrDefault(c => factColumn.Name.EndsWith(c.Name));
+            if (dim != null)
+            {
+                var dimColumn = dim.Columns.FirstOrDefault(c => factColumn.Name == c.Name);
                 if (dimColumn != null)
                 {
                     var rel = Model.AddRelationship();
                     rel.FromColumn = factColumn;
                     rel.ToColumn = dimColumn;
                 }
-			}
-		}
-	}
+            }
+        }
+    }
 }
 
 wb.Close();
