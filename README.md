@@ -38,9 +38,9 @@ string fileName = @"C:\Desktop\ModelAutoBuild";
   
 After completing Step 7, your model has been created within Tabular Editor.
 
-If you want to deploy the model to SQL Server Analysis Services or Azure Analysis Services, view Tabular Editor's [Command Line Options](https://github.com/otykier/TabularEditor/wiki/Command-line-Options "Command Line Options").
+If you want to deploy the model to [SQL Server Analysis Services](https://docs.microsoft.com/analysis-services/ssas-overview?view=asallproducts-allversions "SSAS") or [Azure Analysis Services](https://azure.microsoft.com/services/analysis-services/ "Azure AS"), view Tabular Editor's [Command Line Options](https://github.com/otykier/TabularEditor/wiki/Command-line-Options "Command Line Options").
 
-If you want to deploy the model to Power BI Premium, view the instructions on this [post](https://github.com/TabularEditor/tabulareditor.github.io/blob/master/_posts/2020-06-02-PBI-SP-Access.md "post").
+If you want to deploy the model to [Power BI Premium](https://powerbi.microsoft.com/power-bi-premium/ "Power BI Premium"), view the instructions on this [post](https://github.com/TabularEditor/tabulareditor.github.io/blob/master/_posts/2020-06-02-PBI-SP-Access.md "post").
 
 ## Additional Notes
 
